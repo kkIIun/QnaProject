@@ -35,7 +35,7 @@ def search(request):
 
 def new(request):
     if request.method == 'POST':
-        form = QuestionForm(request.POST)
+        form = QuestionForm(request.POST, request.FILES)
         if form.is_valid :
             content = form.save(commit=False)
             content.pub_date = timezone.now()
@@ -49,8 +49,8 @@ def edit(request,question_id):
     question = get_object_or_404(Question,pk=question_id)
 
     if request.method == 'POST':
-        form = QuestionForm(request.POST,instance= question)
-        if form.is_valid :
+        form = QuestionForm(request.POST,instance= question)    # 여기 아직 request.FILES 이거 추가 안함! 위에만 함!
+        if form.is_valid():
             question = form.save()
             return redirect('question',question.id)
 

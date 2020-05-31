@@ -1,10 +1,10 @@
 {% extends "base.html" %}
 {% block content %}
 
-<form method="POST">
+<form method="POST" enctype="multipart/form-data">
     {%csrf_token%}
     {{form.as_p}}
     <input class="btn btn-dark" type="submit" value="저장">
 </form>
 
-{% endblock%}
+{% endblock %}

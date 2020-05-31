@@ -16,6 +16,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path,include
 import question.urls
+
+# 아래 두줄 # 미디어 변경 부분
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -27,6 +29,6 @@ urlpatterns = [
     path('question/',include(question.urls)),
 
     path('answer/select/<int:answer_id>', answer.views.select,name = "select"),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 

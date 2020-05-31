@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
+{% load static %}
+<!-- form이 없다니! 여기 enctype="multipart/form-data" 이거 추가해야 하는거 아닌가? -->
 <div class="container">
     <div class="point">
     {{question.subject_name}} > {{question.professor_name}}
@@ -15,5 +17,23 @@
 
     <a href="{%url 'edit' question.id%}" class="btn-sm btn btn-outline-primary">수정하기</a>
     <a href="{%url 'delete' question.id%}" class="btn-sm btn btn-outline-primary">삭제하기</a>
-</div>
+    
+    <hr>
+    <a href="{% url 'answer' question.id %}" class="btn-sm btn btn-outline-primary">답변하기</a>
+    {% for answer in answers %}
+        {% if answer.sleceted == True %}
+            채택됨
+        {% else%}
+            채택을 기다리는중 !
+            <a href="{% url 'select' answer.id%}">채택하기</a>
+    
+        {% endif %}
+            {{answer.title}}
+            {{answer.body}}
+            {{answer.pub_date}}
+            <img src="{{answer.image.url}}" alt="">
+            <!-- 여기 미디어 추가! -->
+    {% endfor%}
+
+    </div>
 {% endblock %}

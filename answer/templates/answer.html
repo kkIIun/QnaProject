@@ -1,6 +1,25 @@
-<!-- nav 바! -->
+{% load static %}
 
-<form action="{% url 'create' %}" method = "POST">
+
+<!-- nav 바 넣어야되네 -->
+<h1>새 글 작성하기</h1>
+
+<!-- 아래 한 줄, 미디어 변경 부분(form) -->
+<!-- 여기서 title같은거 다 없애고 form해서 안되나? -->
+<form method='POST' enctype="multipart/form-data">
+    {%csrf_token%}
+        {{form.as_p}}    
+    <input class = "btn btn-dark" type="submit" value="저장">
+</form>
+
+{% endblock %}
+
+
+
+
+
+<!-- 
+<form action="{% url 'create' %}" method = "POST" enctype="multipart/form-data">
     {%csrf_token%}
     <h3>Q 질문</h3> : <input type="text" name="title" size="40">
 
@@ -10,15 +29,4 @@
     -답변이 등록되면 질문 수정/삭제가 불가합니다."></textarea>
 
     <button type="submit">제출하기</button>
-</form>
-
-<!-- 아래는 model 값들 -->
-
-<!-- {{answer.title}}
-{{answer.pub_date}}
-{{answer.body}}
- 나중에 이미지 -->
-<!-- {{answer.professor_name}}
-{{answer.subject_name}}
-{{answer.answer}}   -> 이거 Foreign --> 
-<!-- title, body, 작성자 정보(?), 기입한 시간 넘기기 -->
+</form> -->
