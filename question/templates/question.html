@@ -25,11 +25,13 @@
     <a href="{% url 'answer' question.id %}" class="btn-lg btn btn-outline-primary" style="margin-left:42%;">답변하기</a>
     <br>
     {% for answer in answers %}
+        <a href="{%url 'edit' answer.id%}" class="btn-sm btn btn-outline-primary">수정하기</a>
+        <a href="{%url 'delete' answer.id%}" class="btn-sm btn btn-outline-primary">삭제하기</a>
         {% if answer.selected != True%}
         <form action="{% url 'select' answer.id%}">
             <input type="submit" value="채택하기">
         </form>
-        {% elif answer.selected == True %}
+        {% else %}
         채택됨!<br>
         {% endif%}
     
@@ -43,7 +45,7 @@
         <hr>
     {% endfor%}
     
-    <hr>
+    
 
     </div>
 {% endblock %}
