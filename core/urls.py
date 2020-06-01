@@ -18,6 +18,7 @@ from django.urls import path,include
 import question.urls
 import answer.urls
 import account.urls
+# 미디어 부분
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -29,6 +30,6 @@ urlpatterns = [
     path('question/',include(question.urls)),
     path('answer/',include(answer.urls)),
     path('account/',include(account.urls)),
-]
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 

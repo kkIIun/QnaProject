@@ -37,7 +37,7 @@ def search(request):
 
 def new(request):
     if request.method == 'POST':
-        form = QuestionForm(request.POST)
+        form = QuestionForm(request.POST, request.FILES)
         if form.is_valid :
             content = form.save(commit=False)
             content.pub_date = timezone.now()

@@ -123,3 +123,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [ os.path.join(BASE_DIR,'question','static')] # static 파일 있는 경로
 STATIC_ROOT = os.path.join(BASE_DIR, 'static') # static 파일을 한곳에 모아줄 위치
+
+# 미디어 추가
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')    # media 파일이 저장되는 위치
+MEDIA_URL = '/media/'   # 미디어파일 요청 받을 url 주소

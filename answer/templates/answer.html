@@ -1,18 +1,24 @@
-<!-- nav 바! -->
+{% extends "base.html" %}
+{% block content %}
+<div style="display:inline-block; vertical-align: middle; width:200px">
+    <form method="POST" class = m-4 enctype="multipart/form-data">
+        {%csrf_token%}
+        {{form.as_p}}
+        <input class="btn btn-dark" type="submit" value="저장">
+    </form>
+</div>
+{% endblock%}
 
-<form action="{% url 'create' %}" method = "POST">
+<!-- <form action="{% url 'create' %}" method = "POST">
     {%csrf_token%}
     <h3>{{question.title}}</h3>
     <p name="question_id">{{question.id}}</p>
     <h3>A 답변</h3> : <input type="text" name="title" size="40">
 
-    <textarea name="body" id="" cols="30" rows="10" 
-    placeholder="궁금한 내용을 질문해 주세요.
-    질문 시 이런 점을 주의해 주세요!
-    -답변이 등록되면 질문 수정/삭제가 불가합니다."></textarea>
+    <textarea name="body" id="" cols="30" rows="10" ></textarea>
     <input type = "text" name="question_id" value="{{question.id}}" style= "display : none;">
     <button type="submit">제출하기</button>
-</form>
+</form> -->
 
 <!-- 아래는 model 값들 -->
 

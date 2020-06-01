@@ -5,12 +5,17 @@
     {{question.subject_name}}(과목명) > {{question.professor_name}}(교수명), {{question.user.username}}
     </div>
     
-        <h3>질문 : {{question.title}}</h3>
+        
 
     <hr>
-    <div class="card p-3 my-3 " style="width: 30rem;">
+    <div class="card p-3 my-3 " style="width: 40rem;">
+        <h3>질문 : {{question.title}}</h3>
+        <hr>
         <h5>{{question.body}}</h5>
-        <p style="text-align: right; margin: 0;">{{question.pub_date}}</p>
+        {% if question.image%}
+            <img src="{{question.image.url}}">
+        {% endif %}
+        <p style="text-align: right; margin: 0;color:grey;">{{question.pub_date}}</p>
     </div>
 
     <a href="{%url 'edit' question.id%}" class="btn-sm btn btn-outline-primary">수정하기</a>
@@ -20,20 +25,25 @@
     <a href="{% url 'answer' question.id %}" class="btn-lg btn btn-outline-primary" style="margin-left:42%;">답변하기</a>
     <br>
     {% for answer in answers %}
-        {% if answer.selected == True%}
+        {% if answer.selected != True%}
         <form action="{% url 'select' answer.id%}">
             <input type="submit" value="채택하기">
         </form>
-        {% elif answer.selected != True %}
+        {% elif answer.selected == True %}
         채택됨!<br>
         {% endif%}
     
         {{answer.title}}
         {{answer.body}}
+        {% if answer.image%}
+            <img src="{{answer.image.url}}">
+        {% endif %}
         {{answer.pub_date}}
         {{answer.user.username}}
         <hr>
     {% endfor%}
+    
+    <hr>
 
     </div>
 {% endblock %}

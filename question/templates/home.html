@@ -13,8 +13,8 @@
                 <div class="box" style="position: relative;">
                     
                     <img src="{% static 'image/banner.jpg'%}" class="d-block" height="400px" width="800px">
-                    <a href="{%url 'new'%}" class="btn btn-primary btn-lg btn-block" style="position:absolute;left:750px;top: 63%;width: 300px;height: 80px;font-size: 25px;padding-top: 20px;">질문하기</a>
-                    <div class="card p-3" style="width: 18.75rem;position:absolute;left:750px;top: 10%;height: 12rem;">
+                    <a href="{%url 'new'%}" class="btn btn-outline-primary btn-lg btn-block" style="position:absolute;left:750px;top: 63%;width: 300px;height: 80px;font-size: 25px;padding-top: 20px;">질문하기</a>
+                    <div class="card p-3" style="width: 18.75rem;position:absolute;left:750px;top: 10%;height: 8rem;">
                         {% if user.is_authenticated %}
                             <h3 style="text-align: center;">안녕하세요 {{user.username}}님</h3>
                             {{user.birthday}}
@@ -23,7 +23,7 @@
                             <a href="{%url 'logout'%}">로그아웃</a>
                         {% else %}
                         <a href="{%url 'login'%}" class="btn btn btn-outline-primary btn-lg " style="height: 70px;padding-top: 20px;">로그인</a>
-                        <a href="{%url 'register'%}">회원가입</a>
+                        <a href="{%url 'register'%}" class="btn pull-right">회원가입</a>
                         {% endif %}
                     </div>
                 </div>
@@ -44,7 +44,7 @@
     </div>
     <div class="container">
 
-        <h3>질문 보기</h3>
+        <h3>질문 보기!</h3>
         <hr>
         {% for question in questions %}
         <div class="card p-3 my-3">
