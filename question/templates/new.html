@@ -1,9 +1,9 @@
 {% extends "base.html" %}
 {% block content %}
-<div style="display:inline-block; vertical-align: middle; width:200px">
+<div style="position:absolute;top:10%;left:30%;inline-block; width:200px;">
     <form method="POST" class = m-4 enctype="multipart/form-data">
         {%csrf_token%}
-        {{form.as_p}}
+        {{form.as_table}}
         <input class="btn btn-dark" type="submit" value="저장">
     </form>
 </div>
