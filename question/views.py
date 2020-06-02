@@ -9,6 +9,14 @@ def home(request):
     questions = Question.objects.all()
     return render(request,'home.html',{'questions': questions})
 
+# 페이지네이션 코드 시작
+    # qeustion = Question.objects
+    # paginator = Paginator(questions, 3)  # 첫 번째는 분할 될 객체, 두 번째는 한 페이지에 담길 객체의 개수
+    # page = request.GET.get('page')
+    # posts = paginator.get_page(page)    # page번호 받아서 해당 page 리턴해준다
+    # return render(request, 'home.html', {'question':question,'posts',posts}) # render함수로 posts를 넘겨준다
+# 페이지네이션 코드 끝
+
 def question(request,question_id):
     question = get_object_or_404(Question,pk = question_id)
     answers = Answer.objects.filter(question_id = question.id)

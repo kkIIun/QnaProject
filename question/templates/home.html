@@ -43,18 +43,15 @@
         </div>
     </div>
     <div class="container">
-
         <h3>답변을 기다리는 질문</h3>
         <hr>
         {% for question in questions %}
         <div class="card p-3 my-3">
             <a href="{%url 'question' question.id%}" id="content">
                 <h3>{{question.title}}</h3>
-
-                교수명:{{question.professor_name}} 교수님
-                과목명:{{question.subject_name}}
+                강의 : {{question.subject_name}} / 
+                {{question.professor_name}} 교수님
                 <p style="text-align: right; margin: -1.3rem; padding-right:1rem;padding-bottom:0.7rem;color:grey;">{{question.pub_date}}</p>
-
             </a>
         </div>
             
