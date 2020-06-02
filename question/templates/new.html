@@ -1,20 +1,26 @@
 {% extends "base.html" %}
 {% block content %}
-<div style="position:absolute;top:10%;left:30%;inline-block;width:200px;">
+<div style="position:absolute;top:15%;left:30%;inline-block;width:200px;">
     <form method="POST" class = m-4 enctype="multipart/form-data">
         {%csrf_token%}
-        {{form.as_table}}
+        <!-- {{form.as_table}} -->
         
-            <!-- <div class="fieldWrapper">
+            <div class="fieldWrapper">
                 {{ form.title.errors }}
-                <label for="id_title">Q</label>
+                <h3 style="color:dodgerblue;margin-left: -2rem;margin-bottom: -2rem;font-weight: bold;">Q</h3>
                 {{ form.title }}
             </div>
 
             <div class="fieldWrapper" >
                 {{ form.body.errors }}
-                <label for="id_body">질문하기</label>
+                <br>
                 {{ form.body }}
+            </div>
+
+            <div class="fieldWrapper" >
+                {{ form.image.errors }}
+                <label for="id_body">이미지 첨부</label>
+                {{ form.image }}
             </div>
 
             <div class="fieldWrapper">
@@ -27,25 +33,10 @@
                 {{ form.subject_name.errors }}
                 <label for="id_subject_name">과목 이름</label>
                 {{ form.subject_name }}
-            </div> -->
+            </div>
             
 
-            <input class="btn btn-dark" type="submit" value="저장">
+            <input class="btn btn-dark" type="submit" value="질문하기" style="margin-top:1rem">
     </form>
 </div>
 {% endblock%}
-
-<!-- css 적용할 연구
-    <p><label for="id_title">Title:</label>
-        <input id="id_title" type="text" name="title" maxlength="100" /></p> 
-
-    <div class="fieldWrapper">
-        {{ form.subject.errors }}
-        <label for="id_subject">Email subject:</label>
-        {{ form.subject }}
-    </div>
-
-
--->
-
-    <!--  fields = ['title','body','image','professor_name','subject_name'] -->
