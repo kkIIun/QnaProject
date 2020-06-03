@@ -16,6 +16,7 @@
                     <a href="{%url 'new'%}" class="btn btn-outline-primary btn-lg btn-block" style="position:absolute;left:750px;top: 63%;width: 300px;height: 80px;font-size: 25px;padding-top: 20px;">질문하기</a>
                     <div class="card p-3" style="width: 18.75rem;position:absolute;left:750px;top: 10%;height: 8rem;">
                         {% if user.is_authenticated %}
+                      
                             <h3 style="text-align: center;">안녕하세요 {{user.username}}님</h3>
                             <div class="row">
                                 <div class="col-md-1"></div>
@@ -31,7 +32,7 @@
                                 </div>
                             </div>
                         {% else %}
-                        <a href="{%url 'login'%}" class="btn btn btn-outline-primary btn-lg " style="height: 70px;padding-top: 20px;">로그인</a>
+                        <a href="{%url 'login'%}" class="btn btn btn-outline-primary btn-lg " style="height: 70px;padding-top: 13px;">로그인</a>
                         <a href="{%url 'register'%}" class="btn pull-right">회원가입</a>
                         {% endif %}
                     </div>
@@ -47,20 +48,21 @@
             </a>
         </div>
     </div>
-    <div class="container">
 
-        <h3>질문 보기!</h3>
+    <div class="container">
+        <h3>답변을 기다리는 질문</h3>
         <hr>
         {% for question in posts %}
         <div class="card p-3 my-3">
             <a href="{%url 'question' question.id%}" id="content">
                 <h3>{{question.title}}</h3>
-                교수명:{{question.professor_name}}
-                과목명:{{question.subject_name}}
-                {{question.pub_date}}
+                강의 : {{question.subject_name}} / 
+                {{question.professor_name}} 교수님
+                <p style="text-align: right; margin: -1.3rem; padding-right:1rem;padding-bottom:0.7rem;color:grey;">{{question.pub_date}}</p>
             </a>
         </div>
         {% endfor %}
+
         {% if posts.has_previous%}
         <a href="?page={{posts.previous_page_number}}">previous</a>
         {% endif%}
@@ -70,9 +72,6 @@
         {% if posts.has_next%}
         <a href="?page={{posts.next_page_number}}">next</a>
         {% endif%}
-
-        
-    
     </div>
-    
     {% endblock %}
+

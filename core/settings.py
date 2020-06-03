@@ -25,7 +25,7 @@ SECRET_KEY = '7_@+(xn+b*8l7%*e=!vhj43%m1olc&pw-l%*s%a07mx(6yp#96'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 AUTH_USER_MODEL = "account.CustomUserModel"
 # Application definition
