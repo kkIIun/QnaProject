@@ -5,47 +5,66 @@
     {{question.subject_name}}(과목명) > {{question.professor_name}}(교수명), {{question.user.username}}
     </div>
     
+<hr>   
+<!-- 질문카드 -->
+
+    <div class="card" style="width: 40rem;">
+        <div class="card-header">
+            <h3>{{question.title}}</h3>
+        </div>
         
-
-    <hr>
-    <div class="card p-3 my-3 " style="width: 40rem;">
-        <h3>질문 : {{question.title}}</h3>
-        <hr>
-        <h5>{{question.body}}</h5>
-        {% if question.image%}
-            <img src="{{question.image.url}}">
-        {% endif %}
-        <p style="text-align: right; margin: 0;color:grey;">{{question.pub_date}}</p>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+                <h5>{{question.body}}</h5>
+                {% if question.image%}
+                    <img src="{{question.image.url}}">
+                {% endif %}
+                <p style="text-align: right; margin: 0;color:grey;">{{question.pub_date}}</p>
+                <a href="{%url 'edit' question.id%}" class="btn-sm btn btn-outline-primary">수정하기</a>
+                <a href="{%url 'delete' question.id%}" class="btn-sm btn btn-outline-primary">삭제하기</a>
+            </li>
+        </ul>
     </div>
 
-    <a href="{%url 'edit' question.id%}" class="btn-sm btn btn-outline-primary">수정하기</a>
-    <a href="{%url 'delete' question.id%}" class="btn-sm btn btn-outline-primary">삭제하기</a>
+
     
-    <hr>
-    <a href="{% url 'answer' question.id %}" class="btn-lg btn btn-outline-primary" style="margin-left:42%;">답변하기</a>
-    <br>
+
+
+    <a href="{% url 'answer' question.id %}" class="btn-lg btn btn-outline-primary" style="margin-left:42%;float:right;margin-top:-3rem;">답변하기</a>
+<br>
+
+<!-- 답변카드 -->
+
     {% for answer in answers %}
-        <a href="{%url 'edit' answer.id%}" class="btn-sm btn btn-outline-primary">수정하기</a>
-        <a href="{%url 'delete' answer.id%}" class="btn-sm btn btn-outline-primary">삭제하기</a>
-        {% if answer.selected != True%}
-        <form action="{% url 'select' answer.id%}">
-            <input type="submit" value="채택하기">
-        </form>
-        {% else %}
-        채택됨!<br>
-        {% endif%}
-    
-        {{answer.title}}
-        {{answer.body}}
-        {% if answer.image%}
-            <img src="{{answer.image.url}}">
-        {% endif %}
-        {{answer.pub_date}}
-        {{answer.user.username}}
-        <hr>
-    {% endfor%}
-    
-    
+        <div class="card" style="width: 40rem;float:right;margin-bottom:2rem;">    
+            <div class="card-header">
+                {{answer.user.username}}님의 답변
+                <h3>{{answer.title}}</h3>
 
-    </div>
+                {% if answer.selected != True%}
+                    <form action="{% url 'select' answer.id%}">
+                        <input type="submit" value="채택하기" style="float:right;margin-top:-3rem;">
+                    </form>
+                {% else %}
+                    채택됨!<br>
+                {% endif%}
+            </div>
+            
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+
+
+                        {{answer.body}}
+                        {% if answer.image%}
+                            <img src="{{answer.image.url}}">
+                            <p style="text-align: right; margin: 0;color:grey;">{{answer.pub_date}}</p>
+                            <a href="{%url 'edit' answer.id%}" class="btn-sm btn btn-outline-primary">수정하기</a>
+                            <a href="{%url 'delete' answer.id%}" class="btn-sm btn btn-outline-primary">삭제하기</a>
+
+                        {% endif %}
+                    </li>
+                </ul>
+        </div>      
+    {% endfor%}
+
 {% endblock %}
