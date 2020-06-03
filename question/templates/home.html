@@ -16,21 +16,28 @@
                     <a href="{%url 'new'%}" class="btn btn-outline-primary btn-lg btn-block" style="position:absolute;left:750px;top: 63%;width: 300px;height: 80px;font-size: 25px;padding-top: 20px;">질문하기</a>
                     <div class="card p-3" style="width: 18.75rem;position:absolute;left:750px;top: 10%;height: 8rem;">
                         {% if user.is_authenticated %}
-                            <h4 style="text-align: center;">안녕하세요 {{user.username}}님</h4>
-                            <p style="text-align: center;">{{user.birthday}} / {{user.gender}} / {{user.point}} point</p> 
-                            
-                            <a href="{%url 'logout'%}" style="text-align:right">로그아웃</a>
+                      
+                            <h3 style="text-align: center;">안녕하세요 {{user.username}}님</h3>
+                            <div class="row">
+                                <div class="col-md-1"></div>
+                                <div class="col-md-1">
+                                    <img src="{{user.get_img}}" class="d-block" height="40px" width="40px" style="margin-left: 10px;">
+                                </div>
+                                <div class="col-md-8" style="margin-top: 7px;margin-left: 20px;">
+                                    <h4 style="display:contents">{{user.get_grade}}</h4>({{user.point}})
+                                </div>
+                                <div class="col-md-4"></div>
+                                <div class="col-md-8">
+                                    <a href="{%url 'logout'%} ">로그아웃</a>
+                                </div>
+                            </div>
                         {% else %}
                         <a href="{%url 'login'%}" class="btn btn btn-outline-primary btn-lg " style="height: 70px;padding-top: 13px;">로그인</a>
                         <a href="{%url 'register'%}" class="btn pull-right">회원가입</a>
                         {% endif %}
                     </div>
                 </div>
-                
 
-            </div>
-            
-            </div>
             <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="sr-only">Previous</span>
@@ -45,7 +52,7 @@
     <div class="container">
         <h3>답변을 기다리는 질문</h3>
         <hr>
-        {% for question in questions %}
+        {% for question in posts %}
         <div class="card p-3 my-3">
             <a href="{%url 'question' question.id%}" id="content">
                 <h3>{{question.title}}</h3>
@@ -55,6 +62,16 @@
             </a>
         </div>
         {% endfor %}
+
+        {% if posts.has_previous%}
+        <a href="?page={{posts.previous_page_number}}">previous</a>
+        {% endif%}
+        <span>{{ posts.number}}</span>
+        <span>/</span>
+        <span>{{posts.paginator.num_pages}}</span>
+        {% if posts.has_next%}
+        <a href="?page={{posts.next_page_number}}">next</a>
+        {% endif%}
     </div>
     {% endblock %}
 

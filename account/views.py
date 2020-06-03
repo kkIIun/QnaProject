@@ -38,5 +38,11 @@ def register(req):
     else : 
         form =RegisterForm()
         return render(req,'account.html',{'form':form})
+        
+@property
+def get_grade(self):
+    if(user.point>10) :
+        user.grade = '브론즈'
+        user.save()
 # Create your views here.
 

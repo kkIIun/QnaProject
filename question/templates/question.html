@@ -6,8 +6,6 @@
     </div>
     
 <hr>   
-<!-- 질문카드 -->
-
     <div class="card" style="width: 40rem;">
         <div class="card-header">
             <h3>{{question.title}}</h3>
@@ -20,48 +18,48 @@
                     <img src="{{question.image.url}}">
                 {% endif %}
                 <p style="text-align: right; margin: 0;color:grey;">{{question.pub_date}}</p>
-                <a href="{%url 'edit' question.id%}" class="btn-sm btn btn-outline-primary">수정하기</a>
-                <a href="{%url 'delete' question.id%}" class="btn-sm btn btn-outline-primary">삭제하기</a>
+                {% if request.user.id == question.user.id%}
+                  <a href="{%url 'edit' question.id%}" class="btn-sm btn btn-outline-primary">수정하기</a>
+                  <a href="{%url 'delete' question.id%}" class="btn-sm btn btn-outline-primary">삭제하기</a>
+                {% endif %}
             </li>
         </ul>
     </div>
 
 
-    
-
-
     <a href="{% url 'answer' question.id %}" class="btn-lg btn btn-outline-primary" style="margin-left:42%;float:right;margin-top:-3rem;">답변하기</a>
 <br>
 
-<!-- 답변카드 -->
-
     {% for answer in answers %}
+
         <div class="card" style="width: 40rem;float:right;margin-bottom:2rem;">    
             <div class="card-header">
                 {{answer.user.username}}님의 답변
                 <h3>{{answer.title}}</h3>
 
                 {% if answer.selected != True%}
-                    <form action="{% url 'select' answer.id%}">
-                        <input type="submit" value="채택하기" style="float:right;margin-top:-3rem;">
-                    </form>
+                  {% if request.user.id == question.user.id%}
+                      <form action="{% url 'select' answer.id%}">
+                          <input type="submit" value="채택하기" style="float:right;margin-top:-3rem;">
+                      </form>
+                  {% endif %}
                 {% else %}
-                    채택됨!<br>
+                  + 1point!<br>
                 {% endif%}
             </div>
             
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item">
-
-
                         {{answer.body}}
                         {% if answer.image%}
                             <img src="{{answer.image.url}}">
-                            <p style="text-align: right; margin: 0;color:grey;">{{answer.pub_date}}</p>
-                            <a href="{%url 'edit' answer.id%}" class="btn-sm btn btn-outline-primary">수정하기</a>
-                            <a href="{%url 'delete' answer.id%}" class="btn-sm btn btn-outline-primary">삭제하기</a>
-
                         {% endif %}
+                            <p style="text-align: right; margin: 0;color:grey;">
+                              {{answer.user.username}}{{answer.pub_date}}</p>
+                            {% if request.user.id == answer.user.id%}
+                              <a href="{%url 'edit' answer.id%}" class="btn-sm btn btn-outline-primary">수정하기</a>
+                              <a href="{%url 'delete' answer.id%}" class="btn-sm btn btn-outline-primary">삭제하기</a>
+                            {% endif %}
                     </li>
                 </ul>
         </div>      
