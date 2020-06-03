@@ -12,27 +12,36 @@
         <h3>질문 : {{question.title}}</h3>
         <hr>
         <h5>{{question.body}}</h5>
-        {% if question.image%}
+        {% if question.image %}
             <img src="{{question.image.url}}">
         {% endif %}
         <p style="text-align: right; margin: 0;color:grey;">{{question.pub_date}}</p>
     </div>
-
-    <a href="{%url 'edit' question.id%}" class="btn-sm btn btn-outline-primary">수정하기</a>
-    <a href="{%url 'delete' question.id%}" class="btn-sm btn btn-outline-primary">삭제하기</a>
+    {% if request.user.id == question.user.id%}
+        <a href="{%url 'edit' question.id%}" class="btn-sm btn btn-outline-primary">수정하기</a>
+        <a href="{%url 'delete' question.id%}" class="btn-sm btn btn-outline-primary">삭제하기</a>
+    {% endif %}
     
     <hr>
     <a href="{% url 'answer' question.id %}" class="btn-lg btn btn-outline-primary" style="margin-left:42%;">답변하기</a>
     <br>
     {% for answer in answers %}
-        <a href="{%url 'edit' answer.id%}" class="btn-sm btn btn-outline-primary">수정하기</a>
-        <a href="{%url 'delete' answer.id%}" class="btn-sm btn btn-outline-primary">삭제하기</a>
+
+        {% if request.user.id == answer.user.id%}
+            <a href="{%url 'a_edit' answer.id%}" class="btn-sm btn btn-outline-primary">수정하기</a>
+            <a href="{%url 'a_delete' answer.id%}" class="btn-sm btn btn-outline-primary">삭제하기</a>
+        {% endif %}
+
         {% if answer.selected != True%}
+
+        {% if request.user.id == question.user.id%}
         <form action="{% url 'select' answer.id%}">
             <input type="submit" value="채택하기">
         </form>
+        {% endif %}
+
         {% else %}
-        채택됨!<br>
+            + 1point!<br>
         {% endif%}
     
         {{answer.title}}

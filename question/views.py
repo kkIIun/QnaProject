@@ -4,10 +4,16 @@ from .models import Question
 from django.utils import timezone
 from answer.models import Answer
 from account.models import CustomUserModel
+from django.utils.timezone import localdate
+from django.core.paginator import Paginator
 
 def home(request):
-    questions = Question.objects.all()
-    return render(request,'home.html',{'questions': questions})
+    question = Question.objects
+    q_list = Question.objects.all()
+    paginator = Paginator(q_list,3)
+    page = request.GET.get('page')
+    posts = paginator.get_page(page)
+    return render(request,'home.html',{'question': question, 'posts' : posts})
 
 def question(request,question_id):
     question = get_object_or_404(Question,pk = question_id)
@@ -65,6 +71,18 @@ def delete(request,question_id):
     delete_question = get_object_or_404(Question, pk = question_id)
     delete_question.delete()
     return redirect('home')
+
+def attend(req):
+    print(localdate())
+    if localdate() != req.user.last_signed_at : 
+        req.user.last_signed_at = localdate()
+        req.user.point += 5
+        req.user.save()
+        return redirect('home')
+
+    else :
+        return redirect('home')
+
 
 
 # Create your views here.

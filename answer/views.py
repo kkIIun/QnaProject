@@ -7,31 +7,24 @@ from question.models import Question
 
 def select(request, answer_id):
     answer = get_object_or_404(Answer, pk=answer_id)
-    question = answer.question
-    user = answer.user
-    if q_user.point > 10:
-        user.point += 1
-        q_user = question.user
-        q_user.point -= 1
-        user.save()
-        q_user.save()
+    question_user = answer.question.user
+    answer_user = answer.user
 
-    #  q_user = answer.question.user()
-    #  if q_user.point < 10:
-    #      q_user.point -= 10
-    #      answer.user.point += 10
-    #      q_user.save()
-    #      answer.user.save()
-
-    answer.selected = True
-    print(answer.selected)
+    if question_user.point > 0:
+        answer_user.point += 1
+        answer_user.grade += 1
+        question_user.point -= 1
+        answer_user.save()
+        question_user.save()
+        answer.selected = True
+    
     answer.save()
-    return redirect('question', question.id)
+    return redirect('question', answer.question.id)
 
 
 def answer(request,question_id):
     if request.method == 'POST':
-        form = AnswerForm(request.POST, request.FILES)
+        form = AnswerForm(request.POST,request.FILES)
         if form.is_valid :
             content = form.save(commit=False)
             content.pub_date = timezone.now()
@@ -61,3 +54,4 @@ def delete(request,answer_id):
     delete_answer = get_object_or_404(Answer, pk = answer_id)
     delete_answer.delete()
     return redirect('question',delete_answer.question.id)
+
