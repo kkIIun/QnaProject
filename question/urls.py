@@ -8,5 +8,5 @@ urlpatterns = [
     path('delete/<int:question_id>',views.delete, name="delete"),
     path('edit/<int:question_id>',views.edit, name="edit"),
     path('attend/',views.attend, name = "attend"),
-    path('my_question/',views.my_question, name = "my_question"),   # 내 질문 보기   
+    path('my_question/',views.my_question, name = "my_question"),   # 내 질문 보기    
 ]
