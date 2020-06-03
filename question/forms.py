@@ -13,4 +13,4 @@ class QuestionForm(forms.ModelForm) :
             'subject_name': forms.TextInput(attrs={'class': 'form-control'}),
         }
 
-        # 'form-control my-5 p-5'
+        # 'form-control my-5 p-5' 

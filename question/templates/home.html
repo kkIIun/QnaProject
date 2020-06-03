@@ -19,7 +19,7 @@
                         <!-- 윗줄을 바꿨어 근데 {&'my_question'user.user_id%} {&'my_question'user.username%}여야 하려나? -->
                     {% endif %}
                     <div class="card p-3 border-primary" style="width: 18.75rem;position:absolute;left:750px;top: 10%;height: 8rem;">
-                        {% if user.is_authenticated %}
+                        {% if user.is_authenticated %} 
 
                             <h3 style="text-align: center;">안녕하세요 {{user.username}}님</h3>
                             <div class="row">

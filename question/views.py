@@ -34,7 +34,7 @@ def my_question(request, user_id):  # user_id를 받는다  근데 user_id? user
     posts = paginator.get_page(page)
 
     return render(request,'my_question.html',{'questions':questions, 'posts':posts})    
-# 내질문보기 끝
+# 내질문보기 끝 
 
 def search(request):
     q = request.GET.get('q')
