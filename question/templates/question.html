@@ -17,11 +17,19 @@
                 {% if question.image%}
                     <img src="{{question.image.url}}">
                 {% endif %}
-                <p style="text-align: right; margin: 0;color:grey;">{{question.pub_date}}</p>
-                {% if request.user.id == question.user.id%}
-                  <a href="{%url 'edit' question.id%}" class="btn-sm btn btn-outline-primary">수정하기</a>
-                  <a href="{%url 'delete' question.id%}" class="btn-sm btn btn-outline-primary">삭제하기</a>
-                {% endif %}
+                <div class="row">
+                    <div class="col-md-1.5" style="padding-right: 10px;">
+                    {% if request.user.id == question.user.id %}
+                            <a href="{%url 'edit' question.id%}" class="btn-sm btn btn-outline-primary">수정하기</a>
+                    </div>
+                    <div class="col-md-2" style="padding-left: 0;">
+                        <a href="{%url 'delete' question.id%}" class="btn-sm btn btn-outline-primary">삭제하기</a>
+                    {% endif %}
+                    </div>
+                    <div class="col">
+                        <p style="text-align: right; margin: 0;color:grey;">{{question.pub_date}}</p>
+                    </div>
+                </div>
             </li>
         </ul>
     </div>
@@ -31,38 +39,86 @@
 <br>
 
     {% for answer in answers %}
+        {% if answer.user.id == question.user.id %}
+            <div class="card" style="width: 40rem;margin-bottom:2rem;">
+                <div class="card-header">
+                    {{answer.user.username}}님의 답변
+                    <h3>{{answer.title}}</h3>
 
-        <div class="card" style="width: 40rem;float:right;margin-bottom:2rem;">    
-            <div class="card-header">
-                {{answer.user.username}}님의 답변
-                <h3>{{answer.title}}</h3>
-
-                {% if answer.selected != True%}
-                  {% if request.user.id == question.user.id%}
-                      <form action="{% url 'select' answer.id%}">
-                          <input type="submit" value="채택하기" style="float:right;margin-top:-3rem;">
-                      </form>
-                  {% endif %}
-                {% else %}
-                  + 1point!<br>
-                {% endif%}
-            </div>
-            
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item">
-                        {{answer.body}}
-                        {% if answer.image%}
-                            <img src="{{answer.image.url}}">
-                        {% endif %}
-                            <p style="text-align: right; margin: 0;color:grey;">
-                              {{answer.user.username}}{{answer.pub_date}}</p>
-                            {% if request.user.id == answer.user.id%}
-                              <a href="{%url 'edit' answer.id%}" class="btn-sm btn btn-outline-primary">수정하기</a>
-                              <a href="{%url 'delete' answer.id%}" class="btn-sm btn btn-outline-primary">삭제하기</a>
+                    {% if answer.selected != True%}
+                    {% if request.user.id == question.user.id%}
+                        <form action="{% url 'select' answer.id%}">
+                            <input type="submit" value="채택하기" style="float:right;margin-top:-3rem;">
+                        </form>
+                    {% endif %}
+                    {% else %}
+                        + 1point!<br>
+                    {% endif%}
+                </div>
+                
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            {% if answer.image%}
+                                <img src="{{answer.image.url}}" style="height: 70%;width: 70%;display: block;margin-bottom: 10px;">
                             {% endif %}
-                    </li>
-                </ul>
-        </div>      
+                            {{answer.body}}
+                                <div class="row" style="margin-top: 10px;">
+                                    <div class="col-md-1.5" style="padding-right: 10px;">
+                                    {% if request.user.id == answer.user.id%}
+                                        <a href="{%url 'a_edit' answer.id%}" class="btn-sm btn btn-outline-primary">수정하기</a>
+                                    </div>
+                                    <div class="col-md-2" style="padding-left: 0;">
+                                        <a href="{%url 'a_delete' answer.id%}" class="btn-sm btn btn-outline-primary">삭제하기</a>
+                                    {% endif %}
+                                    </div>
+                                    <div class="col">
+                                        <p style="text-align: right; margin: 0;color:grey;">{{answer.pub_date}}</p>
+                                    </div>
+                                </div>
+                        </li>
+                    </ul>
+            </div>
+             
+        {% else%}
+            <div class="card" style="width: 40rem;float:right;margin-bottom:2rem;">    
+                <div class="card-header">
+                    {{answer.user.username}}님의 답변
+                    <h3>{{answer.title}}</h3>
+
+                    {% if answer.selected != True%}
+                    {% if request.user.id == question.user.id%}
+                        <form action="{% url 'select' answer.id%}">
+                            <input type="submit" value="채택하기" style="float:right;margin-top:-3rem;">
+                        </form>
+                    {% endif %}
+                    {% else %}
+                    + 1point!<br>
+                    {% endif%}
+                </div>
+                
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            {% if answer.image%}
+                                <img src="{{answer.image.url}}" style="height: 70%;width: 70%;display: block;margin-bottom: 10px;">
+                            {% endif %}
+                            {{answer.body}}
+                                <div class="row" style="margin-top: 10px;">
+                                    <div class="col-md-1.5" style="padding-right: 10px;">
+                                    {% if request.user.id == answer.user.id%}
+                                        <a href="{%url 'a_edit' answer.id%}" class="btn-sm btn btn-outline-primary">수정하기</a>
+                                    </div>
+                                    <div class="col-md-2" style="padding-left: 0;">
+                                        <a href="{%url 'a_delete' answer.id%}" class="btn-sm btn btn-outline-primary">삭제하기</a>
+                                    {% endif %}
+                                    </div>
+                                    <div class="col">
+                                        <p style="text-align: right; margin: 0;color:grey;">{{answer.pub_date}}</p>
+                                    </div>
+                                </div>
+                        </li>
+                    </ul>
+            </div>      
+        {% endif %}
     {% endfor%}
 
 {% endblock %}
