@@ -14,4 +14,5 @@ class Question(models.Model):
     subject_name = models.CharField(max_length=200,null=True)
     user = models.ForeignKey(CustomUserModel, on_delete=models.CASCADE)
 
+
     # answer = models.ForeignKey(Answer, on_delete= models.CASCADE)
