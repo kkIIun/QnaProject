@@ -1,32 +1,34 @@
 {% extends "base.html" %}
 {% block content %}
-<div style="display:inline-block; vertical-align: middle; width:200px">
-    <form method="POST" class = m-4 enctype="multipart/form-data">
+
+
+<div class="container mt-5">
+    <form method="POST" class="card" style="margin-top:5rem;margin-left:auto;margin-right:auto;width: 40rem; border-width: 0px; padding-left:3rem; padding" enctype="multipart/form-data">
         {%csrf_token%}
-        {{form.as_p}}
-        <input class="btn btn-dark" type="submit" value="저장">
+        
+        <div class="form-group">
+
+        
+            <div class="fieldWrapper">
+                {{ form.title.errors }}
+                <h3 style="color:mediumseagreen;margin-left: -2rem;margin-bottom: -2.2rem;font-weight: bold;">A</h3>
+                <div>{{ form.title }}</div>
+            </div>
+
+            <div class="fieldWrapper" >
+                {{ form.body.errors }}
+                <br>
+                {{ form.body }}
+            </div>
+
+            <div class="fieldWrapper" >
+                {{ form.image.errors }}
+                <label for="id_body">이미지 첨부</label>
+                {{ form.image }}
+            </div>
+
+            <input class="btn btn-dark" type="submit" value="저장" style="margin-top:1rem">
+        </div>
     </form>
 </div>
 {% endblock%}
-
-<!-- <form action="{% url 'create' %}" method = "POST">
-    {%csrf_token%}
-    <h3>{{question.title}}</h3>
-    <p name="question_id">{{question.id}}</p>
-    <h3>A 답변</h3> : <input type="text" name="title" size="40">
-
-    <textarea name="body" id="" cols="30" rows="10" ></textarea>
-    <input type = "text" name="question_id" value="{{question.id}}" style= "display : none;">
-    <button type="submit">제출하기</button>
-</form> -->
-
-<!-- 아래는 model 값들 -->
-
-<!-- {{answer.title}}
-{{answer.pub_date}}
-{{answer.body}}
- 나중에 이미지 -->
-<!-- {{answer.professor_name}}
-{{answer.subject_name}}
-{{answer.answer}}   -> 이거 Foreign --> 
-<!-- title, body, 작성자 정보(?), 기입한 시간 넘기기 -->

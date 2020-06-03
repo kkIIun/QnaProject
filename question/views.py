@@ -20,6 +20,22 @@ def question(request,question_id):
     answers = Answer.objects.filter(question_id = question.id)
     return render(request,'question.html',{'question':question, 'answers': answers})
 
+# 내질문보기 시작
+def my_question(request, user_id):  # user_id를 받는다  근데 user_id? username?
+    user_q = request.GET.get('user_q')
+
+    questions = Question.objects.filter(    
+            user_id__icontains=user_q            # user / user_id / id / username ?
+        )
+
+    q_list = Question.objects.all()     # Question이 아니라 my_question 인자만 받아야 하는데,,,
+    paginator = Paginator(q_list,3)
+    page = request.GET.get('page')
+    posts = paginator.get_page(page)
+
+    return render(request,'my_question.html',{'questions':questions, 'posts':posts})    
+# 내질문보기 끝
+
 def search(request):
     q = request.GET.get('q')
 

@@ -1,8 +1,47 @@
 {% extends "base.html" %}
-{% block content%}
-    <form method="POST">
+{% block content %}
+
+
+<div class="container mt-5">
+    <form method="POST" class="card" style="margin-top:5rem;margin-left:auto;margin-right:auto;width: 40rem; border-width: 0px; padding-left:3rem; padding" enctype="multipart/form-data">
         {%csrf_token%}
-        {{form.as_p}}
-        <input class="btn btn-dark" type="submit" value="수정">
+        
+        <div class="form-group">
+
+        
+            <div class="fieldWrapper">
+                {{ form.title.errors }}
+                <h3 style="color:dodgerblue;margin-left: -2rem;margin-bottom: -2.2rem;font-weight: bold;">Q</h3>
+                <div>{{ form.title }}</div>
+            </div>
+
+            <div class="fieldWrapper" >
+                {{ form.body.errors }}
+                <br>
+                {{ form.body }}
+            </div>
+
+            <div class="fieldWrapper" >
+                {{ form.image.errors }}
+                <label for="id_body">이미지 첨부</label>
+                {{ form.image }}
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    {{ form.professor_name.errors }}
+                    <label for="id_professor_name">교수님 성함</label>
+                    {{ form.professor_name }}
+                </div>
+
+                <div class="col-sm-6">
+                    {{ form.subject_name.errors }}
+                    <label for="id_subject_name">과목 이름</label>
+                    {{ form.subject_name }}
+                </div>
+            </div>
+
+            <input class="btn btn-dark" type="submit" value="수정" style="margin-top:1rem">
+        </div>
     </form>
+</div>
 {% endblock%}
