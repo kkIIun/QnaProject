@@ -14,7 +14,7 @@ def home(request):
     page = request.GET.get('page')
     posts = paginator.get_page(page)
     return render(request,'home.html',{'question': question, 'posts' : posts})
-
+ 
 def question(request,question_id):
     question = get_object_or_404(Question,pk = question_id)
     answers = Answer.objects.filter(question_id = question.id)
