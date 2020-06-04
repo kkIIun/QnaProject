@@ -2,7 +2,7 @@
 {% block content %}
 <div class="container">
     <div class="point">
-    {{question.subject_name}}(과목명) > {{question.professor_name}}(교수명), {{question.user.username}}
+    {{question.subject_name}}(과목명) > {{question.professor_name}}(교수명), {{question.user.username}}(작성자)
     </div>
     
 <hr>   
@@ -17,7 +17,7 @@
                 {% if question.image%}
                     <img src="{{question.image.url}}">
                 {% endif %}
-                <div class="row">
+                <div class="row"> 
                     <div class="col-md-1.5" style="padding-right: 10px;">
                     {% if request.user.id == question.user.id %}
                             <a href="{%url 'edit' question.id%}" class="btn-sm btn btn-outline-primary">수정하기</a>

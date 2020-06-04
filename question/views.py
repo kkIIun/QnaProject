@@ -76,6 +76,13 @@ def attend(req):
     else :
         return redirect('home')
 
+def my_question(req):
+
+    questions = Question.objects.filter(user = req.user)
+        
+    return render(req,'my_question.html',{'questions':questions})
+    # return render(request,'new.html',{'form':form})
+
 
 
 # Create your views here.
