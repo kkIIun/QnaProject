@@ -9,37 +9,49 @@
             <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
             </ol>
             <div class="carousel-inner">
+
             <div class="carousel-item active">
                 <div class="box" style="position: relative;">
-                    
                     <img src="{% static 'image/banner.jpg'%}" class="d-block" height="400px" width="800px">
-                    {% if user.is_authenticated %}
-                        <a href="{%url 'new'%}" class="btn btn-outline-primary btn-lg btn-block" style="position:absolute;left:750px;top: 66%;width: 300px;height: 80px;font-size: 25px;padding-top: 20px;">질문하기</a>
-                        <a href="{%url 'new'%}" class="btn btn-outline-primary btn-lg btn-block" style="position:absolute;left:750px;top: 42%;width: 300px;height: 80px;font-size: 25px;padding-top: 20px;">내질문보기</a>
-                    {% endif %}
-                    <div class="card p-3 border-primary" style="width: 18.75rem;position:absolute;left:750px;top: 10%;height: 8rem;">
-                        {% if user.is_authenticated %}
-                      
-                            <h3 style="text-align: center;">안녕하세요 {{user.username}}님</h3>
-                            <div class="row">
-                                <div class="col-md-1"></div>
-                                <div class="col-md-1">
-                                    <img src="{{user.get_img}}" class="d-block" height="40px" width="40px" style="margin-left: 10px;">
-                                </div>
-                                <div class="col-md-8" style="margin-top: 7px;margin-left: 20px;">
-                                    <h4 style="display:contents">{{user.get_grade}}</h4>({{user.point}})
-                                </div>
-                                <div class="col-md-4"></div>
-                                <div class="col-md-8">
-                                    <a href="{%url 'logout'%} ">로그아웃</a>
-                                </div>
-                            </div>
-                        {% else %}
-                        <a href="{%url 'login'%}" class="btn btn btn-outline-primary btn-lg " style="height: 70px;padding-top: 13px;">로그인</a>
-                        <a href="{%url 'register'%}" class="btn pull-right">회원가입</a>
-                        {% endif %}
-                    </div>
                 </div>
+            </div>
+            <div class="carousel-item">
+                <div class="box" style="position: relative;">
+                    <img src="{% static 'image/banner1.png'%}" class="d-block" height="400px" width="730px">
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="box" style="position: relative;">
+                    <img src="{% static 'image/banner2.png'%}" class="d-block" height="400px" width="750px">
+                </div>
+            </div>
+
+                {% if user.is_authenticated %}
+                <a href="{%url 'new'%}" class="btn btn-outline-primary btn-lg btn-block" style="position:absolute;left:750px;top: 66%;width: 300px;height: 80px;font-size: 25px;padding-top: 20px;">질문하기</a>
+                <a href="{%url 'my_question'%}" class="btn btn-outline-primary btn-lg btn-block" style="position:absolute;left:750px;top: 42%;width: 300px;height: 80px;font-size: 25px;padding-top: 20px;">내질문보기</a>
+                {% endif %}
+            <div class="card p-3 border-primary" style="width: 18.75rem;position:absolute;left:750px;top: 10%;height: 8rem;">
+                {% if user.is_authenticated %}
+              
+                    <h3 style="text-align: center;">안녕하세요 {{user.username}}님</h3>
+                    <div class="row">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-1">
+                            <img src="{{user.get_img}}" class="d-block" height="40px" width="40px" style="margin-left: 10px;">
+                        </div>
+                        <div class="col-md-8" style="margin-top: 7px;margin-left: 20px;">
+                            <h4 style="display:contents">{{user.get_grade}}</h4>({{user.point}})
+                        </div>
+                        <div class="col-md-4"></div>
+                        <div class="col-md-8">
+                            <a href="{%url 'logout'%} ">로그아웃</a>
+                        </div>
+                    </div>
+                {% else %}
+                <a href="{%url 'login'%}" class="btn btn btn-outline-primary btn-lg " style="height: 70px;padding-top: 13px;">로그인</a>
+                <a href="{%url 'register'%}" class="btn pull-right">회원가입</a>
+                {% endif %}
+            </div>
 
             <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
